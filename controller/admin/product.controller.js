@@ -188,9 +188,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
 
   const product = new Products(req.body);
   await product.save();
@@ -243,6 +240,7 @@ module.exports.detail = async (req, res) => {
     console.log(req.params.id);
     const find = {
       deleted: false,
+
       _id: req.params.id,
     };
     const product = await Products.findOne(find);

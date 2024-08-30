@@ -78,8 +78,17 @@ module.exports.index = async (req, res) => {
   // const totalPage = Math.ceil(countProducts / objectPagination.limitItems);
   // objectPagination.totalPage = totalPage;
   //End pagination
+
+  //sort
+  let sort = {};
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = "desc";
+  } else {
+    sort.position = "desc";
+  }
+  //end sort
   const products = await Products.find(find)
-    .sort({ position: "desc" })
+    .sort({ price: "desc" })
     .limit(objectPagination.limitItems)
     .skip(objectPagination.skip);
   res.render("admin/pages/products/index", {

@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 const flash = require("express-flash");
+const path = require("path");
 require("dotenv").config(); // cài đặt dotenv
 const database = require("./config/database.js");
 
@@ -31,6 +32,12 @@ app.use(flash());
 
 //app local variable
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
+//tinymce
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
 
 //router
 router(app);

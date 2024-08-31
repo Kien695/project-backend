@@ -19,12 +19,8 @@ block main
   h1 Danh sách sản phẩm
  
   .card.mb-3
-    .card-header Sắp xếp 
-    .card-body  
-      .row 
-        .col-4 
-          +sort()
-
+    
+    
     .card-header Bộ lọc và tìm kiếm
     .card-body
       .row
@@ -32,6 +28,12 @@ block main
           +filter-status(filterStatus)
         .col-6
           +search(keyword)
+
+    .card-header Sắp xếp 
+    .card-body  
+      .row 
+        .col-4 
+          +sort()
   .card.mb-3
     .card-header Danh sách
      .card-body 
@@ -109,7 +111,7 @@ block main
                     
                 td  
                     a(
-                      href=`${prefixAdmin}/products/edit/${item.id}`
+                      href=`${prefixAdmin}/products/detail/${item.id}`
                       class="btn btn-secondary btn-sm",
                     ) Chi tiết
                     a(

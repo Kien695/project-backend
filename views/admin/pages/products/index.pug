@@ -7,13 +7,7 @@ include ../../mixins/alert.pug
 include ../../mixins/sort.pug
 block main
 
-  //-- if (messages.success)
-    .message.info
-      div(
-        class="alert alert-success"
-        show-alert
-        data-time="5000"
-      ) #{messages.success} <span close-alert>x</span>
+  
   +alert-success(5000)    
     
   h1 Danh sách sản phẩm

@@ -26,7 +26,7 @@ module.exports.createPost = async (req, res) => {
   await record.save();
   res.redirect(`${systemConfig.prefixAdmin}/roles`);
 };
-// [get] /admin/role/edit
+// [get] /admin/role/edit/:id
 
 module.exports.edit = async (req, res) => {
   try {
@@ -45,13 +45,40 @@ module.exports.edit = async (req, res) => {
     res.redirect(`${systemConfig.prefixAdmin}/roles`);
   }
 };
-// [patch] /admin/role/edit
+// [patch] /admin/role/edit/:id
 
 module.exports.editPatch = async (req, res) => {
   try {
     const id = req.params.id;
 
     await Role.updateOne({ _id: id }, req.body);
+    req.flash("success", "Cập nhật thành công!");
+  } catch (error) {
+    req.flash("error", "Cập nhật thất bại!");
+  }
+  res.redirect("back");
+};
+// [get] /admin/role/edit/permissions
+
+module.exports.permissions = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+  const records = await Role.find(find);
+
+  res.render("admin/pages/roles/permissions", {
+    pageTitle: "Phân quyền",
+    records: records,
+  });
+};
+// [patch] /admin/role/edit/permissionsPatch
+
+module.exports.permissionsPatch = async (req, res) => {
+  try {
+    const permissions = JSON.parse(req.body.permissions);
+    for (const item of permissions) {
+      await Role.updateOne({ _id: item.id }, { permissions: item.permissions });
+    }
     req.flash("success", "Cập nhật thành công!");
   } catch (error) {
     req.flash("error", "Cập nhật thất bại!");

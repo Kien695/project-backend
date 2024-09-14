@@ -55,7 +55,7 @@ module.exports.edit = async (req, res) => {
     const newRecords = createTreeHelper.tree(records);
     res.render("admin/pages/products-category/edit", {
       pageTitle: "Chỉnh sửa danh mục sản phẩm",
-      data: data,
+      productcategory: data,
       records: newRecords,
     });
   } catch (error) {
@@ -66,5 +66,37 @@ module.exports.edit = async (req, res) => {
 module.exports.editPatch = async (req, res) => {
   const id = req.params.id;
   await ProductCategory.updateOne({ _id: id }, req.body);
+  res.redirect("back");
+};
+// [get] /admin/products-category/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const find = {
+      deleted: false,
+      _id: req.params.id,
+    };
+    const productCategory = await ProductCategory.findOne(find);
+    console.log(productCategory);
+    res.render("admin/pages/products-category/detail", {
+      pageTitle: productCategory.title,
+      productcategory: productCategory,
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/products-category`);
+  }
+};
+//xóa mềm
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+  await ProductCategory.updateOne(
+    { _id: id },
+    {
+      deleted: true,
+      deletedAt: new Date(),
+    }
+  );
+  `Đã xóa thành công sản phẩm!`;
+
   res.redirect("back");
 };

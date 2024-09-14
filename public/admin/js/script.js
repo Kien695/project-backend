@@ -122,27 +122,6 @@ if (formChangeMulti) {
 }
 //end form change multi
 
-//Delete item
-const buttonDelete = document.querySelectorAll("[button-delete]");
-if (buttonDelete.length > 0) {
-  const formDeleteItem = document.querySelector("#form-delete-item");
-  const path = formDeleteItem.getAttribute("data-path");
-  buttonDelete.forEach((button) => {
-    button.addEventListener("click", () => {
-      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này");
-      if (isConfirm) {
-        const id = button.getAttribute("data-id");
-        const action = `${path}/${id}?_method=DELETE`;
-        console.log(action);
-        // formDeleteItem.submit();
-        formDeleteItem.action = action;
-        formDeleteItem.submit();
-      }
-    });
-  });
-}
-//End Delete item
-
 //show alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
@@ -211,3 +190,23 @@ if (sort) {
   }
 }
 //end sort
+//Delete item category
+const buttonDelete = document.querySelectorAll("[button-delete]");
+if (buttonDelete.length > 0) {
+  const formDeleteItem = document.querySelector("#form-delete-item");
+  const path = formDeleteItem.getAttribute("data-path");
+  buttonDelete.forEach((button) => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này");
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
+        const action = `${path}/${id}?_method=DELETE`;
+        console.log(action);
+        // formDeleteItem.submit();
+        formDeleteItem.action = action;
+        formDeleteItem.submit();
+      }
+    });
+  });
+}
+//End Delete item category

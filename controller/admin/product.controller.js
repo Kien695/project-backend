@@ -179,7 +179,7 @@ module.exports.deleteItem = async (req, res) => {
     }
   );
   `Đã xóa thành công sản phẩm!`;
-  // res.send(` ${status}- ${id}`);
+  
   res.redirect("back");
 };
 // [get] /admin/products/create

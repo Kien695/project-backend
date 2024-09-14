@@ -85,3 +85,36 @@ module.exports.permissionsPatch = async (req, res) => {
   }
   res.redirect("back");
 };
+//xóa mềm
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+  await Role.updateOne(
+    { _id: id },
+    {
+      deleted: true,
+      deletedAt: new Date(),
+    }
+  );
+  `Đã xóa thành công nhóm quyền!`;
+
+  res.redirect("back");
+};
+// [get] /admin/roles/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const find = {
+      deleted: false,
+
+      _id: req.params.id,
+    };
+    const role = await Role.findOne(find);
+    console.log(role);
+    res.render("admin/pages/roles/detail", {
+      pageTitle: role.title,
+      role: role,
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/roles`);
+  }
+};

@@ -2,6 +2,7 @@ const dashboardRouters = require("./dashboard.router.js");
 const productRouters = require("./product.router.js");
 const productCategoryRouters = require("./product-category.router.js");
 const roleRouter = require("./role.router.js");
+const accountRouter = require("./account.router.js");
 const systemConfig = require("../../config/system.js");
 module.exports = (app) => {
   const partAdmin = systemConfig.prefixAdmin;
@@ -9,4 +10,5 @@ module.exports = (app) => {
   app.use(partAdmin + "/products", productRouters);
   app.use(partAdmin + "/products-category", productCategoryRouters);
   app.use(partAdmin + "/roles", roleRouter);
+  app.use(partAdmin + "/accounts", accountRouter);
 };

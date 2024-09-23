@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
     ).toFixed(0);
     return item;
   });
-  console.log(newProducts);
+
   res.render("client/pages/products/index.pug", {
     pageTitle: "Danh sách sản phẩm",
     products: newProducts,

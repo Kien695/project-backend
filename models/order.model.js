@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
   {
     //user_id: String,
-    cart_id: string,
+    cart_id: String,
     userInfo: {
-      fullName: string,
-      phone: string,
-      address: string,
+      fullName: String,
+      phone: String,
+      address: String,
     },
     products: [
       {
-        product_id: string,
-        price: number,
-        discountPercentage: number,
-        quantity: number,
+        product_id: String,
+        price: Number,
+        discountPercentage: Number,
+        quantity: Number,
       },
     ],
     deleted: {

@@ -1,0 +1,7 @@
+const express = require("express");
+const router = express.Router();
+const controller = require("../../controller/client/checkout.controller");
+router.get("/", controller.index);
+router.post("/orders", controller.orders);
+router.get("/success/:orderId", controller.success);
+module.exports = router;
